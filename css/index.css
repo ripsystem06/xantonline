@@ -1,0 +1,218 @@
+/* ============================================================
+   index.css — Styles unique to index.html
+   ============================================================ */
+
+/* --- Card --- */
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover {
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+/* --- Problem vs Solution --- */
+.prob-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.12);
+}
+.sol-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(37,99,235,0.07);
+  border: 1px solid rgba(37,99,235,0.2);
+}
+
+/* --- Stat number --- */
+.stat-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--blue-light);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+/* --- Project image placeholder --- */
+.proj-img {
+  width: 100%;
+  height: 180px;
+  background: rgba(37,99,235,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+.proj-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.proj-img span { position: relative; z-index: 1; }
+
+/* --- Browser mockup frame --- */
+.browser-frame {
+  background: rgba(20,20,28,0.95);
+  border-radius: 10px 10px 0 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom: none;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.browser-dots { display: flex; gap: 5px; }
+.browser-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.browser-url {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.browser-screen {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  position: relative;
+}
+.browser-screen iframe {
+  width: 100%;
+  height: 220px;
+  display: block;
+  pointer-events: none;
+  transform-origin: top left;
+}
+.screen-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.95) 100%);
+  z-index: 2;
+}
+.screen-placeholder {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(10,12,20,0.9);
+  position: relative;
+}
+.screen-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* --- Project card v2 --- */
+.pcard {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pcard:hover {
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+/* --- Result pill --- */
+.result-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: 9999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #60A5FA;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Industry tag --- */
+.ind-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Featured card wide --- */
+.pcard-featured .browser-screen iframe { height: 260px; }
+.pcard-featured .screen-placeholder { height: 260px; }
+
+/* --- Screen images --- */
+.screen-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.pcard-featured .screen-img { height: 260px; }
+.screen-img-sm { height: 160px !important; object-fit: cover; }
+.screen-img-md { height: 200px !important; }
+
+/* --- Portfolio CTA banner --- */
+.portfolio-cta {
+  background: rgba(37,99,235,0.07);
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* --- CTA Form Card --- */
+.cta-form-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 32px;
+}

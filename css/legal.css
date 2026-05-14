@@ -1,0 +1,51 @@
+/* ============================================================
+   legal.css — Styles shared across legal pages
+   (aviso-de-privacidad, terminos-y-condiciones, politica-de-cookies)
+   ============================================================ */
+
+/* --- Cookie Table --- */
+.cookie-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.cookie-table th {
+  text-align: left;
+  padding: 10px 14px;
+  color: rgba(255,255,255,.4);
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.cookie-table td {
+  padding: 12px 14px;
+  color: rgba(255,255,255,.5);
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.cookie-table tr:last-child td { border-bottom: none; }
+
+/* --- Cookie Badges --- */
+.badge-essential {
+  background: rgba(37,99,235,.15);
+  color: #60A5FA;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+.badge-analytics {
+  background: rgba(251,191,36,.1);
+  color: #FCD34D;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}

@@ -1,0 +1,64 @@
+/* ============================================================
+   derechos-arco.css — Styles unique to derechos-arco.html
+   ============================================================ */
+
+/* --- ARCO Grid & Cards --- */
+.arco-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+@media (max-width: 600px) {
+  .arco-grid { grid-template-columns: 1fr; }
+}
+
+.arco-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: border-color .15s;
+}
+.arco-card:hover { border-color: rgba(255,255,255,.12); }
+.arco-card .letter {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #3B82F6;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.arco-card .title {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.arco-card .desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.6;
+}
+
+/* --- Form Section --- */
+.form-section {
+  background: rgba(37,99,235,.05);
+  border: 1px solid rgba(37,99,235,.18);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 40px;
+}
+.form-section h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.form-section p {
+  color: rgba(255,255,255,.45);
+  font-size: 14px;
+  margin-bottom: 24px;
+}

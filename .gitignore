@@ -1,0 +1,13 @@
+# Herramientas y configs locales
+.agents/
+.atl/
+.claude/
+skills-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
