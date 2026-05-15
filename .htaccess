@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+</IfModule>
+
+# Allowlist Facebook crawlers
+<IfModule mod_setenvif.c>
+SetEnvIfNoCase User-Agent "^facebookexternalhit" allow_bot
+SetEnvIfNoCase User-Agent "^Facebot" allow_bot
+SetEnvIfNoCase User-Agent "^Twitterbot" allow_bot
+SetEnvIfNoCase User-Agent "^LinkedInBot" allow_bot
+</IfModule>
+
+# Prevent blocking of social media crawlers
+<IfModule mod_authz_core.c>
+<RequireAll>
+Require all granted
+Require not env block_bot
+</RequireAll>
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+Header unset X-Robots-Tag
+</IfModule>
