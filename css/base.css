@@ -46,6 +46,30 @@ nav {
   z-index: 100;
 }
 
+/* --- Logo --- */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo-full {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+.logo-icon {
+  height: 32px;
+  width: auto;
+  display: none;
+}
+@media (max-width: 767px) {
+  .logo-full { display: none; }
+  .logo-icon { display: block; }
+}
+.logo-footer { display: flex; align-items: center; }
+.logo-footer .logo-full { height: 45px; }
+.logo-footer .logo-icon { height: 28px; }
+
 /* --- Buttons --- */
 .btn-primary {
   background: var(--blue);
