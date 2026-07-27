@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Xant — Soporte Técnico de Precisión & Desarrollo Tecnológico</title>
+<meta name="description" content="Xant Fix: soporte técnico presencial y remoto. Xant Web: desarrollo de sitios, apps y sistemas a medida. Ensenada, BC · Remoto nacional."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="public/faviconBlanco.svg">
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary-fixed-dim": "#b3c5ff", "tertiary": "#b9c8de", "secondary-container": "#00d2fd",
+        "secondary-fixed-dim": "#3cd7ff", "inverse-primary": "#0054d6", "on-surface": "#e5e2e3",
+        "primary": "#b3c5ff", "surface-bright": "#3a393a", "on-primary-container": "#f8f7ff",
+        "surface-tint": "#b3c5ff", "on-background": "#e5e2e3", "surface-container-highest": "#353436",
+        "surface-container-lowest": "#0e0e0f", "error": "#ffb4ab", "outline": "#8c90a1",
+        "secondary": "#a2e7ff", "secondary-fixed": "#b4ebff", "primary-container": "#0066ff",
+        "inverse-on-surface": "#313031", "error-container": "#93000a", "on-primary-fixed": "#001849",
+        "surface-container": "#201f20", "primary-fixed": "#dae1ff", "surface-variant": "#353436",
+        "background": "#131314", "on-surface-variant": "#c2c6d8", "surface-container-high": "#2a2a2b",
+        "surface": "#131314", "inverse-surface": "#e5e2e3", "surface-container-low": "#1c1b1c",
+        "surface-dim": "#131314", "outline-variant": "#424656", "on-primary": "#002b75", "xant-green": "#25D366"
+      },
+      borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+      spacing: { "margin-mobile": "20px", "gutter": "24px", "margin-desktop": "64px", "container-max": "1440px", "unit": "4px" },
+      fontFamily: {
+        "display-lg-mobile": ["Space Grotesk"], "label-mono": ["JetBrains Mono"], "body-lg": ["Geist"],
+        "body-md": ["Geist"], "label-caps": ["JetBrains Mono"], "headline-md": ["Space Grotesk"],
+        "display-lg": ["Space Grotesk"]
+      },
+      fontSize: {
+        "display-lg-mobile": ["40px",{lineHeight:"1.2",letterSpacing:"-0.02em",fontWeight:"700"}],
+        "label-mono": ["14px",{lineHeight:"1.0",letterSpacing:"0.05em",fontWeight:"500"}],
+        "body-lg": ["18px",{lineHeight:"1.6",fontWeight:"400"}], "body-md": ["16px",{lineHeight:"1.6",fontWeight:"400"}],
+        "label-caps": ["12px",{lineHeight:"1.0",letterSpacing:"0.15em",fontWeight:"700"}],
+        "headline-md": ["32px",{lineHeight:"1.3",fontWeight:"600"}],
+        "display-lg": ["72px",{lineHeight:"1.1",letterSpacing:"-0.04em",fontWeight:"700"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .technical-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(179,197,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(179,197,255,0.04) 1px, transparent 1px); }
+  .blue-glow { box-shadow: 0 0 40px 10px rgba(179,197,255,0.12); }
+  .scanline { background: linear-gradient(to bottom, rgba(179,197,255,0) 50%, rgba(179,197,255,0.04) 50%); background-size: 100% 4px; }
+  .kinetic-text { text-shadow: 0 0 12px rgba(179,197,255,0.5); }
+  @keyframes pulse-dot { 0%{transform:scale(0.95);opacity:0.7} 50%{transform:scale(1.2);opacity:1} 100%{transform:scale(0.95);opacity:0.7} }
+  .live-pulse { animation: pulse-dot 2s infinite; }
+
+  /* Background animation — subtle radial pulse */
+  @keyframes bg-pulse { 0%,100%{opacity:0.3} 50%{opacity:0.6} }
+  .bg-aura { animation: bg-pulse 6s ease-in-out infinite; }
+  .bg-aura-delayed { animation: bg-pulse 6s ease-in-out 3s infinite; }
+
+  /* Entrance animations */
+  @keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fade-in { from{opacity:0} to{opacity:1} }
+  .reveal { opacity:0; }
+  .reveal.visible { animation: fade-up 0.7s ease-out forwards; }
+  .reveal-delay-1.visible { animation-delay: 0.1s; }
+  .reveal-delay-2.visible { animation-delay: 0.2s; }
+  .reveal-delay-3.visible { animation-delay: 0.3s; }
+  .reveal-delay-4.visible { animation-delay: 0.4s; }
+
+  /* Terminal Splash */
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  @keyframes boot-sequence { 0%{opacity:0;transform:translateY(8px)} 30%{opacity:1;transform:translateY(0)} 100%{opacity:1;transform:translateY(0)} }
+  @keyframes splash-out { 0%{opacity:1} 100%{opacity:0;visibility:hidden} }
+  .terminal-splash {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0a0a0c;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    animation: splash-out 0.6s ease-out 2.2s forwards;
+  }
+  .terminal-cursor {
+    display: inline-block;
+    width: 3px; height: 64px;
+    background: var(--tw-color-primary, #b3c5ff);
+    animation: blink 0.8s step-end infinite;
+    margin-left: 2px;
+    vertical-align: middle;
+  }
+  .terminal-prompt {
+    font-size: clamp(40px, 8vw, 72px);
+    font-weight: 700;
+    color: #b3c5ff;
+    letter-spacing: -0.03em;
+    display: flex; align-items: center;
+  }
+  .terminal-boot-line {
+    font-size: 13px;
+    color: #4a4a5a;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    animation: boot-sequence 0.4s ease-out forwards;
+    text-align: center;
+  }
+  .boot-1 { animation-delay: 0.4s; }
+  .boot-2 { animation-delay: 0.8s; }
+  .boot-3 { animation-delay: 1.2s; }
+  .terminal-logo {
+    opacity: 0;
+    animation: boot-sequence 0.5s ease-out 0.1s forwards;
+    margin-bottom: 20px;
+  }
+  .terminal-logo img { height: 48px; width: auto; filter: brightness(0) invert(1); opacity: 0.6; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary-container">
+<!-- ============================================================ -->
+<!-- TERMINAL SPLASH -->
+<!-- ============================================================ -->
+<div class="terminal-splash" id="splash" style="display:none;">
+  <div class="terminal-logo">
+    <img src="public/blanco.svg" alt="Xant"/>
+  </div>
+  <div class="terminal-prompt">
+    &gt;<span class="terminal-cursor"></span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-top:24px;">
+    <p class="terminal-boot-line boot-1">initializing kernel_xant v4.2.0 ... [OK]</p>
+    <p class="terminal-boot-line boot-2">loading precision_modules ... [OK]</p>
+    <p class="terminal-boot-line boot-3">system online · ready for input</p>
+  </div>
+</div>
+
+<!-- Animated background auras -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+  <div class="bg-aura absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]"></div>
+  <div class="bg-aura-delayed absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-secondary/5 blur-[100px]"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- NAVBAR -->
+<!-- ============================================================ -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-tertiary/20">
+  <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+    <a href="/" class="flex items-center gap-3">
+      <img src="public/blanco.svg" alt="Xant" class="h-20 w-auto"/>
+    </a>
+    <div class="hidden md:flex gap-8">
+      <a href="#servicios" class="font-label-caps text-label-caps text-primary border-b border-primary pb-1">Xant Fix</a>
+      <a href="#web" class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Xant Web</a>
+      <a href="xant-hardware.html" class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Hardware</a>
+      <a href="#proyectos" class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Proyectos</a>
+      <a href="#contacto" class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Contacto</a>
+    </div>
+    <a href="https://wa.me/526463077208" target="_blank" class="bg-xant-green text-white font-label-caps text-label-caps py-2 px-6 hover:brightness-110 transition-all flex items-center gap-2">
+      <span class="material-symbols-outlined text-[16px]">chat</span> WhatsApp
+    </a>
+  </div>
+</nav>
+
+<main class="relative overflow-hidden technical-grid">
+
+<!-- ============================================================ -->
+<!-- HERO -->
+<!-- ============================================================ -->
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Banner background — full screen -->
+  <div class="absolute inset-0 z-0">
+    <img src="public/banner.png" alt="" class="w-full h-full object-cover opacity-25" style="mask-image:linear-gradient(to bottom, black 60%, transparent 100%);-webkit-mask-image:linear-gradient(to bottom, black 60%, transparent 100%);"/>
+    <div class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-background/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background"></div>
+  </div>
+  <div class="z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop reveal">
+    <div class="flex items-center gap-3 mb-6 bg-surface-container-low w-fit px-4 py-1 border border-tertiary/20 rounded-sm">
+      <span class="live-pulse w-2 h-2 rounded-full bg-secondary-container"></span>
+      <span class="font-label-mono text-label-mono text-secondary">XANT FIX · ENSENADA, BC · REMOTO NACIONAL</span>
+    </div>
+    <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface uppercase mb-6 leading-none kinetic-text">
+      SOPORTE TÉCNICO<br/>
+      <span class="text-primary">DE PRECISIÓN</span>
+    </h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-10">
+      Xant Fix ofrece soporte técnico presencial y remoto para empresas que no pueden permitirse un downtime. Diagnóstico real, atención el mismo día y soluciones que escalan con tu operación.
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a href="#servicios" class="bg-primary text-on-primary px-8 py-4 font-label-caps text-label-caps font-bold transition-all hover:brightness-110 active:scale-95 border-b-4 border-on-primary-container inline-block">VER SERVICIOS</a>
+      <a href="#contacto" class="border border-secondary text-secondary px-8 py-4 font-label-caps text-label-caps font-bold transition-all hover:bg-secondary/10 inline-block">SOLICITAR DIAGNÓSTICO</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- XANT FIX — SERVICIOS -->
+<!-- ============================================================ -->
+<section id="servicios" class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
+    <div class="space-y-4">
+      <span class="font-label-mono text-label-mono text-primary">[ XANT_FIX ]</span>
+      <h2 class="font-headline-md text-headline-md text-on-surface">SOPORTE TÉCNICO</h2>
+    </div>
+    <div class="w-full md:w-1/3 h-[1px] bg-tertiary/20 mb-3"></div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+    <!-- Por Evento — Remoto -->
+    <div class="md:col-span-4 bg-surface-container-low border border-tertiary/10 p-8 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-1">
+      <span class="material-symbols-outlined text-primary text-4xl mb-6">computer</span>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-2">Xant Fix Remoto</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-4">Atención remota para software, configuración y funcionamiento.</p>
+      <div class="bg-background/50 border border-tertiary/5 p-4 rounded-sm mb-5 text-center">
+        <p class="font-label-caps text-label-caps text-primary mb-1">Cotización personalizada</p>
+        <p class="font-label-mono text-[11px] text-on-surface-variant">por evento · hasta 60 min</p>
+      </div>
+      <ul class="font-label-mono text-[11px] space-y-2 text-on-surface-variant mb-6">
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Diagnóstico inicial</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Conexión remota segura</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Office, correo, impresoras</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Optimización del sistema</li>
+      </ul>
+      <a href="https://wa.me/526463077208?text=Xant%20Fix%20Remoto" target="_blank" class="block text-center border border-primary/30 text-primary font-label-caps text-label-caps py-2 hover:bg-primary/10 transition-all">SOLICITAR</a>
+    </div>
+
+    <!-- Por Evento — Presencial -->
+    <div class="md:col-span-4 bg-surface-container border border-primary/30 p-8 group hover:border-primary/60 transition-all duration-300 reveal reveal-delay-2 relative">
+      <div class="absolute -top-3 right-6 bg-primary text-on-primary-container font-label-caps text-[10px] px-4 py-1">RECOMMENDED</div>
+      <span class="material-symbols-outlined text-secondary text-4xl mb-6">engineering</span>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-2">Xant Fix Presencial</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-4">Atención en sitio en Ensenada para problemas que requieren presencia física.</p>
+      <div class="bg-background/50 border border-tertiary/5 p-4 rounded-sm mb-5 text-center">
+        <p class="font-label-caps text-label-caps text-primary mb-1">Cotización personalizada</p>
+        <p class="font-label-mono text-[11px] text-on-surface-variant">por visita · 90 min · traslado incluido</p>
+      </div>
+      <ul class="font-label-mono text-[11px] space-y-2 text-on-surface-variant mb-6">
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary-container"></span> Diagnóstico en sitio</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary-container"></span> Instalación de programas</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary-container"></span> Configuración de red</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary-container"></span> Impresoras y periféricos</li>
+      </ul>
+      <a href="https://wa.me/526463077208?text=Xant%20Fix%20Presencial" target="_blank" class="block text-center bg-primary text-on-primary font-label-caps text-label-caps py-2 hover:brightness-110 transition-all">SOLICITAR</a>
+    </div>
+
+    <!-- Equipo Lento -->
+    <div class="md:col-span-4 bg-surface-container-lowest border border-tertiary/10 p-8 group hover:border-secondary/40 transition-all duration-300 reveal reveal-delay-3 overflow-hidden">
+      <span class="material-symbols-outlined text-secondary text-4xl mb-6">speed</span>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-2">Equipo Lento</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-4">Optimización para computadoras con arranque lento y bajo rendimiento.</p>
+      <div class="bg-background/50 border border-tertiary/5 p-4 rounded-sm mb-5 text-center">
+        <p class="font-label-caps text-label-caps text-secondary mb-1">Cotización personalizada</p>
+        <p class="font-label-mono text-[11px] text-on-surface-variant">remoto · presencial básica · completa</p>
+      </div>
+      <div class="h-24 bg-background border border-tertiary/5 rounded-sm p-3 overflow-hidden relative mb-5">
+        <div class="font-label-mono text-[10px] text-tertiary opacity-40 leading-tight">
+          &gt; disk_scan.sh running...<br/>
+          &gt; temp_check: 54°C [WARN]<br/>
+          &gt; cleaning temp_files... [OK]<br/>
+          &gt; startup_optimize: -12.3s
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+      </div>
+      <a href="https://wa.me/526463077208?text=Optimización%20Xant%20Fix" target="_blank" class="block text-center border border-secondary/30 text-secondary font-label-caps text-label-caps py-2 hover:bg-secondary/10 transition-all">DIAGNOSTICAR</a>
+    </div>
+
+    <!-- Paquetes — Inicial -->
+    <div class="md:col-span-4 bg-surface-container-low border border-tertiary/10 p-8 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-1">
+      <span class="font-label-mono text-label-mono text-primary mb-2 block">PEQUEÑOS NEGOCIOS</span>
+      <h3 class="font-headline-md text-[20px] text-on-surface mb-1">Empresa Inicial</h3>
+      <p class="font-label-mono text-[11px] text-tertiary mb-5">Hasta 5 equipos</p>
+      <p class="font-label-caps text-label-caps text-primary mb-1">Cotización personalizada</p>
+      <ul class="font-label-mono text-[11px] space-y-1.5 text-on-surface-variant my-5">
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 2 h soporte remoto / mes</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> Revisión preventiva mensual</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> Windows, Office, correo</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> Visita preferencial</li>
+      </ul>
+      <a href="https://wa.me/526463077208?text=Empresa%20Inicial" target="_blank" class="block text-center border border-primary/30 text-primary font-label-caps text-label-caps py-2 hover:bg-primary/10 transition-all">CONTRATAR</a>
+    </div>
+
+    <!-- Paquetes — Operativa -->
+    <div class="md:col-span-4 bg-surface-container border border-primary/30 p-8 group hover:border-primary/60 transition-all duration-300 reveal reveal-delay-2 relative">
+      <div class="absolute -top-3 right-6 bg-primary text-on-primary-container font-label-caps text-[10px] px-4 py-1">MÁS POPULAR</div>
+      <span class="font-label-mono text-label-mono text-primary mb-2 block">OFICINAS</span>
+      <h3 class="font-headline-md text-[20px] text-on-surface mb-1">Empresa Operativa</h3>
+      <p class="font-label-mono text-[11px] text-tertiary mb-5">Hasta 10 equipos</p>
+      <p class="font-label-caps text-label-caps text-primary mb-1">Cotización personalizada</p>
+      <ul class="font-label-mono text-[11px] space-y-1.5 text-on-surface-variant my-5">
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 5 h soporte remoto / mes</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 1 visita presencial mensual</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> Red local y carpetas compartidas</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> Reporte mensual</li>
+      </ul>
+      <a href="https://wa.me/526463077208?text=Empresa%20Operativa" target="_blank" class="block text-center bg-primary text-on-primary font-label-caps text-label-caps py-2 hover:brightness-110 transition-all">CONTRATAR</a>
+    </div>
+
+    <!-- Paquetes — Continua -->
+    <div class="md:col-span-4 bg-surface-container-lowest border border-tertiary/10 p-8 group hover:border-secondary/40 transition-all duration-300 reveal reveal-delay-3">
+      <span class="font-label-mono text-label-mono text-secondary mb-2 block">EMPRESAS</span>
+      <h3 class="font-headline-md text-[20px] text-on-surface mb-1">Empresa Continua</h3>
+      <p class="font-label-mono text-[11px] text-tertiary mb-5">Hasta 20 equipos</p>
+      <p class="font-label-caps text-label-caps text-secondary mb-1">Cotización personalizada</p>
+      <ul class="font-label-mono text-[11px] space-y-1.5 text-on-surface-variant my-5">
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> 10 h soporte remoto / mes</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> 2 visitas presenciales mensuales</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Inventario y bitácora</li>
+        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Atención prioritaria</li>
+      </ul>
+      <a href="https://wa.me/526463077208?text=Empresa%20Continua" target="_blank" class="block text-center border border-secondary/30 text-secondary font-label-caps text-label-caps py-2 hover:bg-secondary/10 transition-all">CONTRATAR</a>
+    </div>
+
+    <!-- Live Status Bar -->
+    <div class="md:col-span-12 bg-surface-container p-1 border-t border-tertiary/20 reveal reveal-delay-4">
+      <div class="flex flex-wrap items-center justify-between gap-4 p-6 bg-surface-container-high border border-tertiary/10">
+        <div class="flex items-center gap-6">
+          <div class="relative">
+            <span class="material-symbols-outlined text-primary text-5xl">support_agent</span>
+            <span class="absolute -top-1 -right-1 live-pulse w-4 h-4 bg-secondary-container rounded-full border-2 border-surface-container-high"></span>
+          </div>
+          <div>
+            <h4 class="font-label-caps text-label-caps text-secondary mb-1">XANT FIX [ACTIVE]</h4>
+            <p class="font-body-md text-body-md text-on-surface">Soporte continuo · Atención el mismo día · Lun–Vie 9AM–6PM</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 bg-background px-6 py-4 rounded-sm border border-tertiary/10">
+          <div class="text-right">
+            <p class="font-label-mono text-[10px] text-tertiary uppercase">Tiempo de respuesta</p>
+            <p class="font-headline-md text-headline-md text-primary leading-none">Mismo día</p>
+          </div>
+          <div class="w-px h-10 bg-tertiary/20"></div>
+          <a href="https://wa.me/526463077208" target="_blank" class="bg-xant-green text-white px-6 py-2 font-label-caps text-label-caps font-bold hover:brightness-110 transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px]">chat</span> WHATSAPP
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pólizas Remotas -->
+    <div class="md:col-span-12 mt-6 reveal">
+      <span class="font-label-mono text-label-mono text-secondary mb-6 block">[ PÓLIZAS_REMOTAS ] — Sin visitas, con atención disponible durante el mes</span>
+    </div>
+    <div class="md:col-span-4 bg-surface-container-low border border-tertiary/10 p-6 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-1">
+      <p class="font-label-caps text-label-caps text-primary mb-2">REMOTA ESENCIAL</p>
+      <p class="font-headline-md text-[22px] text-on-surface mb-1">Cotización personalizada</p>
+      <p class="font-label-mono text-[11px] text-tertiary mb-4">3 equipos · 2 h soporte remoto</p>
+      <p class="font-body-md text-[14px] text-on-surface-variant mb-4">Windows, Office, correo, revisión de rendimiento. Registro de incidencias.</p>
+      <a href="https://wa.me/526463077208?text=Póliza%20Esencial" target="_blank" class="text-primary font-label-caps text-label-caps hover:underline">CONTRATAR →</a>
+    </div>
+    <div class="md:col-span-4 bg-surface-container border border-primary/20 p-6 group hover:border-primary/50 transition-all duration-300 reveal reveal-delay-2">
+      <p class="font-label-caps text-label-caps text-primary mb-2">REMOTA NEGOCIO</p>
+      <p class="font-headline-md text-[22px] text-on-surface mb-1">Cotización personalizada</p>
+      <p class="font-label-mono text-[11px] text-tertiary mb-4">8 equipos · 5 h soporte remoto</p>
+      <p class="font-body-md text-[14px] text-on-surface-variant mb-4">Atención prioritaria. Instalación de programas. Correo, impresoras. Revisión preventiva y reporte.</p>
+      <a href="https://wa.me/526463077208?text=Póliza%20Negocio" target="_blank" class="text-primary font-label-caps text-label-caps hover:underline">CONTRATAR →</a>
+    </div>
+    <div class="md:col-span-4 bg-surface-container-lowest border border-tertiary/10 p-6 group hover:border-secondary/40 transition-all duration-300 reveal reveal-delay-3">
+      <p class="font-label-caps text-label-caps text-secondary mb-2">REMOTA EMPRESARIAL</p>
+      <p class="font-headline-md text-[22px] text-on-surface mb-1">Cotización personalizada</p>
+      <p class="font-label-mono text-[11px] text-tertiary mb-4">15 equipos · 10 h soporte remoto</p>
+      <p class="font-body-md text-[14px] text-on-surface-variant mb-4">Usuarios y estaciones. Revisión preventiva. Bitácora, reporte y recomendaciones. Tarifa preferencial en visitas.</p>
+      <a href="https://wa.me/526463077208?text=Póliza%20Empresarial" target="_blank" class="text-secondary font-label-caps text-label-caps hover:underline">CONTRATAR →</a>
+    </div>
+  </div>
+
+  <div class="mt-12 flex flex-wrap gap-4 justify-center reveal">
+    <button onclick="document.getElementById('modal-adicionales').classList.remove('hidden')" class="border border-secondary/30 text-secondary font-label-caps text-label-caps py-2 px-6 hover:bg-secondary/10 transition-all">SERVICIOS ADICIONALES</button>
+    <button onclick="document.getElementById('modal-condiciones').classList.remove('hidden')" class="border border-tertiary/20 text-tertiary font-label-caps text-label-caps py-2 px-6 hover:bg-tertiary/10 transition-all">CONDICIONES GENERALES</button>
+  </div>
+  <p class="font-label-mono text-[11px] text-tertiary/40 text-center mt-6">Todos los servicios se formalizan bajo contrato. Piezas y licencias se cotizan por separado.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- XANT WEB & SYSTEMS -->
+<!-- ============================================================ -->
+<section id="web" class="py-24 bg-surface-container-lowest relative">
+  <div class="absolute inset-0 scanline opacity-10"></div>
+  <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
+      <div class="space-y-4">
+        <span class="font-label-mono text-label-mono text-secondary">[ XANT_WEB ]</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">DESARROLLO &amp; SISTEMAS</h2>
+      </div>
+      <div class="w-full md:w-1/3 h-[1px] bg-tertiary/20 mb-3"></div>
+    </div>
+
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mb-16 reveal">
+      En Xant desarrollamos sitios web, aplicaciones y sistemas personalizados para empresas, negocios y profesionistas. Cada proyecto se analiza y cotiza de manera individual.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+      <!-- Sitios Web -->
+      <div class="md:col-span-8 bg-surface-container-low border border-tertiary/10 p-8 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-1">
+        <span class="material-symbols-outlined text-primary text-4xl mb-4">language</span>
+        <h3 class="font-headline-md text-[24px] text-on-surface mb-4">Sitios Web</h3>
+        <p class="font-body-md text-on-surface-variant mb-6">Landing pages, sitios empresariales y corporativos diseñados a la medida de tu negocio.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-background/50 border border-tertiary/5 p-4"><p class="font-label-caps text-label-caps text-primary mb-2">Landing Pages</p><p class="font-label-mono text-[11px] text-on-surface-variant leading-relaxed">Una sola página para promocionar un producto, servicio o campaña. Formularios, WhatsApp, SEO.</p></div>
+          <div class="bg-background/50 border border-tertiary/5 p-4"><p class="font-label-caps text-label-caps text-primary mb-2">Sitios Empresariales</p><p class="font-label-mono text-[11px] text-on-surface-variant leading-relaxed">Páginas informativas con servicios, portafolio, blog, formularios y más.</p></div>
+          <div class="bg-background/50 border border-tertiary/5 p-4"><p class="font-label-caps text-label-caps text-primary mb-2">Corporativos</p><p class="font-label-mono text-[11px] text-on-surface-variant leading-relaxed">Múltiples secciones, administración de contenido, bilingüe, CRM y portales.</p></div>
+        </div>
+      </div>
+
+      <!-- Tiendas en Línea -->
+      <div class="md:col-span-4 bg-surface-container border border-primary/20 p-8 group hover:border-primary/50 transition-all duration-300 reveal reveal-delay-2">
+        <span class="material-symbols-outlined text-secondary text-4xl mb-4">storefront</span>
+        <h3 class="font-headline-md text-[24px] text-on-surface mb-4">Tiendas en Línea</h3>
+        <p class="font-body-md text-on-surface-variant mb-4">Shopify, WooCommerce o plataforma a medida para vender por internet.</p>
+        <ul class="font-label-mono text-[11px] space-y-1.5 text-on-surface-variant">
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Catálogo de productos</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Carrito y métodos de pago</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Control de inventario</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Envíos y facturación</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Cupones y suscripciones</li>
+        </ul>
+      </div>
+
+      <!-- Apps Web -->
+      <div class="md:col-span-4 bg-surface-container-lowest border border-tertiary/10 p-8 group hover:border-secondary/40 transition-all duration-300 reveal reveal-delay-1">
+        <span class="material-symbols-outlined text-secondary text-4xl mb-4">web</span>
+        <h3 class="font-headline-md text-[24px] text-on-surface mb-4">Aplicaciones Web</h3>
+        <p class="font-body-md text-on-surface-variant mb-4">Sistemas que digitalizan procesos manuales: cotizaciones, reservas, seguimiento, portales.</p>
+        <ul class="font-label-mono text-[11px] space-y-1.5 text-on-surface-variant">
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Usuarios, roles y permisos</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Formularios y bases de datos</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Notificaciones y reportes</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary"></span> Acceso multi-dispositivo</li>
+        </ul>
+      </div>
+
+      <!-- Sistemas Empresariales -->
+      <div class="md:col-span-4 bg-surface-container-low border border-tertiary/10 p-8 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-2">
+        <span class="material-symbols-outlined text-primary text-4xl mb-4">database</span>
+        <h3 class="font-headline-md text-[24px] text-on-surface mb-4">Sistemas a Medida</h3>
+        <p class="font-body-md text-on-surface-variant mb-4">Centralizá producción, ventas, inventario, servicios y proyectos en un solo sistema.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-background/50 border border-tertiary/10 px-2 py-1 font-label-mono text-[10px] text-on-surface-variant">Producción</span>
+          <span class="bg-background/50 border border-tertiary/10 px-2 py-1 font-label-mono text-[10px] text-on-surface-variant">Ventas</span>
+          <span class="bg-background/50 border border-tertiary/10 px-2 py-1 font-label-mono text-[10px] text-on-surface-variant">Inventario</span>
+          <span class="bg-background/50 border border-tertiary/10 px-2 py-1 font-label-mono text-[10px] text-on-surface-variant">Servicios</span>
+          <span class="bg-background/50 border border-tertiary/10 px-2 py-1 font-label-mono text-[10px] text-on-surface-variant">Proyectos</span>
+          <span class="bg-background/50 border border-tertiary/10 px-2 py-1 font-label-mono text-[10px] text-on-surface-variant">Clientes</span>
+        </div>
+      </div>
+
+      <!-- Automatización + Dashboards -->
+      <div class="md:col-span-4 bg-surface-container border border-primary/20 p-8 group hover:border-primary/50 transition-all duration-300 reveal reveal-delay-3">
+        <span class="material-symbols-outlined text-primary text-4xl mb-4">smart_toy</span>
+        <h3 class="font-headline-md text-[24px] text-on-surface mb-2">Automatización</h3>
+        <p class="font-body-md text-on-surface-variant mb-6">Ahorrá tiempo y reducí errores automatizando tareas repetitivas. Cotizaciones, reportes, correos, documentos.</p>
+        <span class="material-symbols-outlined text-secondary text-4xl mb-4">monitoring</span>
+        <h3 class="font-headline-md text-[24px] text-on-surface mb-2">Dashboards y Reportes</h3>
+        <p class="font-body-md text-on-surface-variant">Visualizá tu información operativa y comercial. Power BI, Excel, Google Sheets o apps web.</p>
+      </div>
+
+    </div>
+
+    <!-- Proceso de cotización -->
+    <div class="mt-16 bg-surface-container border border-tertiary/10 p-8 md:p-12 reveal">
+      <span class="font-label-mono text-label-mono text-primary mb-4 block">[ PROCESO ]</span>
+      <h3 class="font-headline-md text-[24px] text-on-surface mb-8">Cómo se determina el costo de un proyecto</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="flex gap-4 items-start">
+          <div class="bg-primary/10 p-2 border border-primary/20 text-primary font-label-mono flex-shrink-0">01</div>
+          <div><p class="font-label-caps text-label-caps text-on-surface mb-1">Reunión inicial</p><p class="font-label-mono text-[11px] text-on-surface-variant">Conocemos tu empresa y objetivos.</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="bg-secondary/10 p-2 border border-secondary/20 text-secondary font-label-mono flex-shrink-0">02</div>
+          <div><p class="font-label-caps text-label-caps text-on-surface mb-1">Requerimientos</p><p class="font-label-mono text-[11px] text-on-surface-variant">Identificamos funciones y alcance.</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="bg-primary/10 p-2 border border-primary/20 text-primary font-label-mono flex-shrink-0">03</div>
+          <div><p class="font-label-caps text-label-caps text-on-surface mb-1">Alcance</p><p class="font-label-mono text-[11px] text-on-surface-variant">Definimos entregables y tiempos.</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="bg-secondary/10 p-2 border border-secondary/20 text-secondary font-label-mono flex-shrink-0">04</div>
+          <div><p class="font-label-caps text-label-caps text-on-surface mb-1">Propuesta</p><p class="font-label-mono text-[11px] text-on-surface-variant">Solución, costo y condiciones.</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="bg-primary/10 p-2 border border-primary/20 text-primary font-label-mono flex-shrink-0">05</div>
+          <div><p class="font-label-caps text-label-caps text-on-surface mb-1">Inicio</p><p class="font-label-mono text-[11px] text-on-surface-variant">Arrancamos tras aprobación.</p></div>
+        </div>
+      </div>
+      <p class="font-body-md text-on-surface-variant mt-8 text-center">No vendemos paquetes genéricos. Cada proyecto recibe una propuesta personalizada con funciones, alcance, tiempos y costos claramente definidos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- HARDWARE RESUMEN -->
+<!-- ============================================================ -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+  <div class="bg-surface-container-low border border-tertiary/10 p-8 md:p-12 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-1">
+    <div class="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
+      <div>
+        <span class="material-symbols-outlined text-primary text-4xl mb-4 block">memory</span>
+        <h2 class="font-headline-md text-[28px] text-on-surface mb-2">Xant Hardware</h2>
+        <p class="font-body-md text-on-surface-variant max-w-xl mb-4">Venta, actualización e implementación de equipos y componentes. SSD, RAM, computadoras, periféricos, paquetes de estación de trabajo y renovación empresarial.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Componentes</span>
+          <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Actualización</span>
+          <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Equipos</span>
+          <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Periféricos</span>
+        </div>
+      </div>
+      <a href="xant-hardware.html" class="bg-primary text-on-primary px-6 py-3 font-label-caps text-label-caps hover:brightness-110 transition-all flex items-center gap-2 flex-shrink-0">VER HARDWARE <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PROYECTOS -->
+<!-- ============================================================ -->
+<section id="proyectos" class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
+    <div class="space-y-4">
+      <span class="font-label-mono text-label-mono text-primary">[ PORTFOLIO ]</span>
+      <h2 class="font-headline-md text-headline-md text-on-surface">PROYECTOS EJECUTADOS</h2>
+    </div>
+    <div class="w-full md:w-1/3 h-[1px] bg-tertiary/20 mb-3"></div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+    <!-- Pagos y Servicios Baja — Featured Wide -->
+    <div class="md:col-span-12 bg-surface-container border border-primary/20 p-8 group hover:border-primary/50 transition-all duration-300 reveal reveal-delay-1">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-primary/10 p-2 border border-primary/20 text-primary font-label-mono text-[12px]">01</span>
+            <span class="font-label-caps text-label-caps text-secondary">Fintech · Servicios · BC</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-on-surface mb-3">Pagos y Servicios Baja</h3>
+          <p class="font-body-md text-on-surface-variant mb-4">Plataforma web para distribuidor autorizado de WaliApp en BC. Pago de luz CFE, agua, gas, internet y +100 servicios. Incluye landing de alta conversión con registro de usuarios y generación de repartidores.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">+500K usuarios activos</span>
+            <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">99.9% uptime</span>
+            <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Lead generation</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="https://www.pagoserviciosbaja.com/" target="_blank" class="text-primary font-label-caps text-label-caps hover:underline">pagoserviciosbaja.com →</a>
+          </div>
+        </div>
+        <div class="md:w-80 flex-shrink-0 bg-background border border-tertiary/10 rounded-sm overflow-hidden">
+          <img src="https://www.pagoserviciosbaja.com/images/mujer-celular.png" alt="Pagos y Servicios Baja" class="w-full h-48 object-cover" onerror="this.style.display='none'" style="background:#0a1628;"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stoli Uniforms -->
+    <div class="md:col-span-6 bg-surface-container-low border border-tertiary/10 p-8 group hover:border-primary/40 transition-all duration-300 reveal reveal-delay-2">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="bg-primary/10 p-2 border border-primary/20 text-primary font-label-mono text-[12px]">02</span>
+        <span class="font-label-caps text-label-caps text-secondary">Manufactura · Deportivo · México</span>
+      </div>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-3">Stoli Uniforms</h3>
+      <p class="font-body-md text-on-surface-variant mb-4">Sitio web para fabricante de uniformes deportivos sublimados personalizados (soccer, americano, béisbol, voleibol). Catálogo, galería de trabajos y conversión de visitas en cotizaciones vía WhatsApp.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Next.js</span>
+        <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Catálogo digital</span>
+      </div>
+      <a href="https://www.stoliuniforms.com/" target="_blank" class="text-primary font-label-caps text-label-caps hover:underline">stoliuniforms.com →</a>
+    </div>
+
+    <!-- Valterink Fantasy Maps -->
+    <div class="md:col-span-6 bg-surface-container-lowest border border-tertiary/10 p-8 group hover:border-secondary/40 transition-all duration-300 reveal reveal-delay-2">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="bg-secondary/10 p-2 border border-secondary/20 text-secondary font-label-mono text-[12px]">03</span>
+        <span class="font-label-caps text-label-caps text-primary">Freelance · Cartografía · Internacional</span>
+      </div>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-3">Valterink Fantasy Maps</h3>
+      <p class="font-body-md text-on-surface-variant mb-4">Portfolio y plataforma de comisiones para cartógrafo freelance con +10 años de experiencia. Audiencia internacional de escritores, game masters y worldbuilders. Galería, servicios y formulario de contacto.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Audiencia internacional</span>
+        <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">+10 años de trabajo</span>
+      </div>
+      <a href="https://valterinkfantasymaps.com/" target="_blank" class="text-secondary font-label-caps text-label-caps hover:underline">valterinkfantasymaps.com →</a>
+    </div>
+
+    <!-- Contadora con A -->
+    <div class="md:col-span-12 bg-surface-container border border-primary/20 p-8 group hover:border-primary/50 transition-all duration-300 reveal reveal-delay-2">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-secondary/10 p-2 border border-secondary/20 text-secondary font-label-mono text-[12px]">04</span>
+            <span class="font-label-caps text-label-caps text-primary">Contable · Fiscal · Ensenada, BC</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-on-surface mb-3">Contadora con A</h3>
+          <p class="font-body-md text-on-surface-variant mb-4">Sitio web profesional para despacho contable en Ensenada. Servicios contables y fiscales, cálculo de impuestos, trámites ante el SAT, perfil profesional y formulario de contacto. Diseño limpio con secciones de servicios, proceso de trabajo y CTA para conversión de leads.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">WordPress</span>
+            <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Contable</span>
+            <span class="bg-background/50 border border-tertiary/10 px-3 py-1 font-label-mono text-[10px] text-on-surface-variant">Fiscal</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="https://contadoracona.com/" target="_blank" class="text-secondary font-label-caps text-label-caps hover:underline">contadoracona.com →</a>
+          </div>
+        </div>
+        <div class="md:w-80 flex-shrink-0 bg-background border border-tertiary/10 rounded-sm overflow-hidden flex items-center justify-center p-6">
+          <span class="material-symbols-outlined text-6xl text-tertiary/30">account_balance</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Métricas -->
+    <div class="md:col-span-12 bg-surface-container p-1 border-t border-tertiary/20 reveal reveal-delay-4">
+      <div class="flex flex-wrap items-center justify-between gap-6 p-8 bg-surface-container-high border border-tertiary/10">
+        <div class="flex items-center gap-8">
+          <div class="text-center"><p class="font-display-lg-mobile text-primary">6</p><p class="font-label-mono text-[10px] text-tertiary uppercase mt-1">Proyectos</p></div>
+          <div class="w-px h-12 bg-tertiary/20"></div>
+          <div class="text-center"><p class="font-display-lg-mobile text-secondary">100%</p><p class="font-label-mono text-[10px] text-tertiary uppercase mt-1">Entregados</p></div>
+          <div class="w-px h-12 bg-tertiary/20"></div>
+          <div class="text-center"><p class="font-display-lg-mobile text-primary">10+</p><p class="font-label-mono text-[10px] text-tertiary uppercase mt-1">Años exp.</p></div>
+        </div>
+        <p class="font-label-caps text-label-caps text-on-surface-variant">No solo soporte. Tecnología que trabaja para tu negocio.</p>
+      </div>
+    </div>
+
+    <!-- En desarrollo -->
+    <div class="md:col-span-12 mt-4 reveal reveal-delay-3">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="bg-background border border-primary/30 px-3 py-1 font-label-mono text-[10px] text-primary">EN DESARROLLO</span>
+        <span class="font-label-mono text-[11px] text-tertiary">Proyectos actualmente en construcción</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+        <!-- Alan Ampudia -->
+        <div class="bg-surface-container-low border border-tertiary/10 p-8 group hover:border-primary/40 transition-all duration-300">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-primary/10 p-2 border border-primary/20 text-primary font-label-mono text-[12px]">05</span>
+            <span class="font-label-caps text-label-caps text-on-surface-variant">Deportivo · Automovilismo</span>
+          </div>
+          <h3 class="font-headline-md text-[20px] text-on-surface mb-3">Alan Ampudia</h3>
+          <p class="font-body-md text-on-surface-variant mb-4">Sitio web para piloto profesional de off-road y automovilismo. Competencias, trayectoria, patrocinadores, galería y calendario de carreras. Optimizado para rendimiento y SEO.</p>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-primary live-pulse"></span>
+            <span class="font-label-mono text-[11px] text-tertiary">alanampudia.com — Coming soon</span>
+          </div>
+        </div>
+        <!-- Liveaboard Quetzal -->
+        <div class="bg-surface-container-lowest border border-tertiary/10 p-8 group hover:border-secondary/40 transition-all duration-300">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-secondary/10 p-2 border border-secondary/20 text-secondary font-label-mono text-[12px]">06</span>
+            <span class="font-label-caps text-label-caps text-on-surface-variant">Turismo · Buceo · BCS</span>
+          </div>
+          <h3 class="font-headline-md text-[20px] text-on-surface mb-3">Liveaboard Quetzal</h3>
+          <p class="font-body-md text-on-surface-variant mb-4">Plataforma web para embarcación de buceo en La Paz, BCS. Reservas, itinerarios, galería submarina y captación de turistas internacionales. Proyecto de alto impacto visual.</p>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-secondary-container live-pulse"></span>
+            <span class="font-label-mono text-[11px] text-tertiary">liveaboardquetzal.com — En construcción</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SOBRE MÍ -->
+<!-- ============================================================ -->
+<section id="sobre-mi" class="py-24 bg-surface-container-lowest relative">
+  <div class="absolute inset-0 scanline opacity-10"></div>
+  <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative z-10">
+    <div class="text-center reveal mb-16">
+      <span class="font-label-mono text-label-mono text-primary">[ ENGINEER ]</span>
+      <h2 class="font-headline-md text-headline-md text-on-surface mt-4">SOBRE MÍ</h2>
+    </div>
+    <div class="max-w-4xl mx-auto reveal reveal-delay-1">
+      <div class="bg-surface-container-low border border-tertiary/10 p-8 md:p-12">
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-6">
+          Soy Rafael Ibarra Palomino, ingeniero y fundador de XANT Servicios. Me especializo en transformar retos tecnológicos complejos en sistemas eficientes, diseñando aplicaciones web y soluciones de infraestructura que impulsan de forma directa la operación de las empresas.
+        </p>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-8">
+          Tengo claro que la tecnología no se trata de vender por vender, sino de tomar decisiones técnicas precisas que garanticen estabilidad, rendimiento y escalabilidad. Mi enfoque combina la ingeniería de sistemas, el desarrollo web y la automatización con una meta clara: asegurar que cada herramienta tecnológica funcione con absoluta precisión para respaldar los objetivos de tu negocio.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Soporte N1 &amp; N2</span>
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Infraestructura</span>
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Redes</span>
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Desarrollo Web</span>
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Automatización</span>
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Windows Server</span>
+          <span class="bg-surface-container-high border border-tertiary/10 px-4 py-1.5 font-label-mono text-[11px] text-on-surface-variant">Linux</span>
+        </div>
+        <div class="flex flex-wrap justify-center items-center gap-4">
+          <span class="flex items-center gap-2 bg-background border border-tertiary/10 px-4 py-2 font-label-mono text-[11px] text-on-surface-variant">
+            <span class="w-2 h-2 rounded-full bg-secondary-container live-pulse"></span> Ensenada, BC — Presencial + Remoto
+          </span>
+          <span class="flex items-center gap-2 bg-background border border-tertiary/10 px-4 py-2 font-label-mono text-[11px] text-on-surface-variant">
+            <span class="w-2 h-2 rounded-full bg-primary"></span> 10+ años de experiencia
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CONTACTO -->
+<!-- ============================================================ -->
+<section id="contacto" class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+  <div class="text-center reveal mb-12">
+    <span class="font-label-mono text-label-mono text-secondary">// INICIAR_PROYECTO</span>
+    <h2 class="font-headline-md text-headline-md text-on-surface mt-4">CONTACTO</h2>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mt-4">Solicitá un diagnóstico o contanos tu proyecto. Respondemos el mismo día hábil.</p>
+  </div>
+
+  <div class="max-w-2xl mx-auto reveal reveal-delay-1">
+    <div class="bg-surface-container-low border border-tertiary/10 p-8 md:p-12">
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="font-label-caps text-label-caps text-tertiary mb-1 block">NOMBRE *</label>
+            <input type="text" name="nombre" required class="w-full bg-background border border-tertiary/20 focus:border-primary transition-all outline-none py-2.5 px-4 font-body-md text-on-surface placeholder:text-tertiary/30" placeholder="Tu nombre"/>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-tertiary mb-1 block">EMPRESA</label>
+            <input type="text" name="empresa" class="w-full bg-background border border-tertiary/20 focus:border-primary transition-all outline-none py-2.5 px-4 font-body-md text-on-surface placeholder:text-tertiary/30" placeholder="Tu empresa"/>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-label-caps text-label-caps text-tertiary mb-1 block">CORREO *</label>
+          <input type="email" name="email" required class="w-full bg-background border border-tertiary/20 focus:border-primary transition-all outline-none py-2.5 px-4 font-body-md text-on-surface placeholder:text-tertiary/30" placeholder="correo@empresa.com"/>
+        </div>
+        <div class="mb-4">
+          <label class="font-label-caps text-label-caps text-tertiary mb-1 block">WHATSAPP / TELÉFONO</label>
+          <input type="tel" name="telefono" class="w-full bg-background border border-tertiary/20 focus:border-primary transition-all outline-none py-2.5 px-4 font-body-md text-on-surface placeholder:text-tertiary/30" placeholder="+52 646 000 0000"/>
+        </div>
+        <div class="mb-4">
+          <label class="font-label-caps text-label-caps text-tertiary mb-1 block">SERVICIO *</label>
+          <select name="servicio" required class="w-full bg-background border border-tertiary/20 focus:border-primary transition-all outline-none py-2.5 px-4 font-body-md text-on-surface">
+            <option value="" disabled selected>Selecciona un servicio</option>
+            <option>Xant Fix Remoto (por evento)</option>
+            <option>Xant Fix Presencial (por evento)</option>
+            <option>Paquete Empresa Inicial</option>
+            <option>Paquete Empresa Operativa</option>
+            <option>Paquete Empresa Continua</option>
+            <option>Póliza Remota</option>
+            <option>Optimización (Equipo Lento)</option>
+            <option>Xant Web — Sitio Web</option>
+            <option>Xant Web — Tienda en Línea</option>
+            <option>Xant Web — Aplicación Web</option>
+            <option>Xant Web — Sistema a Medida</option>
+            <option>Automatización</option>
+            <option>Otro / Consulta general</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <label class="font-label-caps text-label-caps text-tertiary mb-1 block">DESCRIPCIÓN *</label>
+          <textarea name="mensaje" required rows="3" class="w-full bg-background border border-tertiary/20 focus:border-primary transition-all outline-none py-2.5 px-4 font-body-md text-on-surface placeholder:text-tertiary/30 resize-none" placeholder="Cuéntanos el problema o proyecto. Entre más detalle, mejor podemos cotizar."></textarea>
+        </div>
+        <button type="submit" class="w-full bg-primary text-on-primary px-8 py-4 font-label-caps text-label-caps font-bold transition-all hover:brightness-110 active:scale-95 border-b-4 border-on-primary-container flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">send</span> ENVIAR MENSAJE
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="w-full py-12 bg-surface-container-lowest border-t border-tertiary/20">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+    <div class="col-span-1 md:col-span-1">
+      <div class="flex items-center gap-2 mb-6">
+        <img src="public/blanco.svg" alt="Xant" class="h-6 w-auto"/>
+        <div class="font-label-caps text-label-caps text-primary">XANT</div>
+      </div>
+      <p class="font-label-mono text-[12px] text-on-surface-variant leading-relaxed">
+        SOPORTE TÉCNICO EMPRESARIAL<br/>DESARROLLO &amp; SISTEMAS<br/>ENSENADA, BAJA CALIFORNIA
+      </p>
+    </div>
+    <div class="space-y-4">
+      <h5 class="font-label-caps text-label-caps text-tertiary mb-2">SERVICIOS</h5>
+      <nav class="flex flex-col gap-2">
+        <a href="/#servicios" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Xant Fix — Soporte</a>
+        <a href="/#web" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Xant Web — Desarrollo</a>
+        <a href="xant-hardware.html" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Xant Hardware</a>
+      </nav>
+    </div>
+    <div class="space-y-4">
+      <h5 class="font-label-caps text-label-caps text-tertiary mb-2">LEGAL</h5>
+      <nav class="flex flex-col gap-2">
+        <a href="/aviso-de-privacidad.html" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Aviso de Privacidad</a>
+        <a href="/terminos-y-condiciones.html" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Términos y Condiciones</a>
+        <a href="/politica-de-cookies.html" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Política de Cookies</a>
+        <a href="/derechos-arco.html" class="font-label-mono text-[12px] text-on-surface-variant hover:text-tertiary hover:underline">Derechos ARCO</a>
+      </nav>
+    </div>
+    <div class="space-y-4">
+      <h5 class="font-label-caps text-label-caps text-tertiary mb-2">CONTACTO</h5>
+      <div class="font-label-mono text-[12px] text-on-surface-variant space-y-2">
+        <p>Status: <span class="text-secondary-container">ONLINE</span></p>
+        <p>Zona: Ensenada, BC</p>
+        <p>Respuesta: Mismo día</p>
+      </div>
+      <a href="https://wa.me/526463077208" target="_blank" class="inline-flex items-center gap-2 bg-xant-green text-white font-label-caps text-label-caps py-2 px-4 hover:brightness-110 transition-all mt-2">
+        <span class="material-symbols-outlined text-[14px]">chat</span> WhatsApp
+      </a>
+    </div>
+    <div class="col-span-full mt-8 pt-6 border-t border-tertiary/10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="font-label-mono text-[10px] text-tertiary/50">
+        © 2025 Xant Desarrollo e Ingeniería · Ensenada, BC, México · Todos los derechos reservados
+      </div>
+      <div class="flex gap-4">
+        <a href="https://wa.me/526463077208" target="_blank" class="font-label-mono text-[10px] text-tertiary/40 hover:text-primary transition-colors">WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- MODAL: Servicios Adicionales -->
+<!-- ============================================================ -->
+<div id="modal-adicionales" class="hidden fixed inset-0 z-[100] bg-background/90 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="bg-surface-container-low border border-primary/30 max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('modal-adicionales').classList.add('hidden')" class="absolute top-3 right-4 text-tertiary hover:text-primary text-2xl leading-none">&times;</button>
+    <span class="font-label-mono text-label-mono text-primary block mb-2">[ ADICIONALES ]</span>
+    <h3 class="font-headline-md text-[24px] text-on-surface mb-6">Servicios Adicionales y Recargos</h3>
+    <div class="space-y-3 mb-8">
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Hora remota adicional</p><p class="font-label-mono text-[11px] text-tertiary">Por evento o excedente</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Hora presencial adicional</p><p class="font-label-mono text-[11px] text-tertiary">Por evento o excedente</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Configuración PC nueva</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Instalación SSD o RAM</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Clonación de disco</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Reinstalación de Windows</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Respaldo de información</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+      <div class="flex justify-between items-center bg-background/50 border border-tertiary/5 p-4"><div><p class="font-body-md text-on-surface font-medium">Impresora en red</p></div><span class="font-label-caps text-label-caps text-primary">Cotizar →</span></div>
+    </div>
+    <p class="font-label-caps text-label-caps text-tertiary mb-4">RECARGOS</p>
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <div class="bg-background/50 border border-tertiary/5 p-4 text-center"><p class="font-label-mono text-[11px] text-tertiary mb-1">Urgente</p><p class="font-display-lg-mobile text-[28px] text-error">+50%</p></div>
+      <div class="bg-background/50 border border-tertiary/5 p-4 text-center"><p class="font-label-mono text-[11px] text-tertiary mb-1">Fuera horario</p><p class="font-display-lg-mobile text-[28px] text-error">+50%</p></div>
+      <div class="bg-background/50 border border-tertiary/5 p-4 text-center"><p class="font-label-mono text-[11px] text-tertiary mb-1">Domingo/Festivo</p><p class="font-display-lg-mobile text-[28px] text-error">+100%</p></div>
+    </div>
+    <a href="https://wa.me/526463077208?text=Servicios%20adicionales%20Xant%20Fix" target="_blank" class="block text-center bg-xant-green text-white font-label-caps text-label-caps py-3 hover:brightness-110 transition-all">COTIZAR POR WHATSAPP</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MODAL: Condiciones Generales -->
+<!-- ============================================================ -->
+<div id="modal-condiciones" class="hidden fixed inset-0 z-[100] bg-background/90 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="bg-surface-container-low border border-primary/30 max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('modal-condiciones').classList.add('hidden')" class="absolute top-3 right-4 text-tertiary hover:text-primary text-2xl leading-none">&times;</button>
+    <span class="font-label-mono text-label-mono text-primary block mb-2">[ CONDICIONES ]</span>
+    <h3 class="font-headline-md text-[24px] text-on-surface mb-4">Condiciones Generales</h3>
+    <p class="font-body-md text-on-surface-variant mb-6">Todos los servicios de Xant Fix se prestan exclusivamente bajo contrato firmado.</p>
+    <div class="space-y-3 font-label-mono text-[12px] text-on-surface-variant">
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> Contratación mínima recomendada: <strong class="text-on-surface">tres meses</strong>.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> Equipos deben <strong class="text-on-surface">registrarse al inicio</strong>.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> <strong class="text-on-surface">Diagnóstico inicial</strong> antes de activar la póliza.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-primary live-pulse flex-shrink-0"></span> Horas no utilizadas <strong class="text-on-surface">no son acumulables</strong>.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> Tiempo en <strong class="text-on-surface">bloques de 30 minutos</strong>.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> Tiempos de respuesta dentro del <strong class="text-on-surface">horario contratado</strong>.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-error/20 p-3"><span class="w-2 h-2 rounded-full bg-error live-pulse flex-shrink-0"></span> <strong class="text-error">Incidencia crítica:</strong> impide trabajar a varios usuarios.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span> Piezas y licencias requieren autorización adicional.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> Proyectos de migración se <strong class="text-on-surface">cotizan por separado</strong>.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-secondary-container flex-shrink-0"></span> Cliente debe proporcionar accesos y licencias legítimas.</div>
+      <div class="flex items-center gap-3 bg-background/50 border border-tertiary/5 p-3"><span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span> Trabajo adicional debe ser autorizado previamente.</div>
+    </div>
+    <a href="https://wa.me/526463077208?text=Info%20pólizas%20Xant%20Fix" target="_blank" class="block text-center bg-xant-green text-white font-label-caps text-label-caps py-3 mt-6 hover:brightness-110 transition-all">CONSULTAR POR WHATSAPP</a>
+  </div>
+</div>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/526463077208?text=Hola,%20me%20interesa%20una%20consulta%20de%20soporte%20técnico" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-xant-green flex items-center justify-center shadow-lg hover:scale-110 transition-transform" title="WhatsApp">
+  <span class="material-symbols-outlined text-white text-2xl">chat</span>
+</a>
+
+<!-- ============================================================ -->
+<!-- SCROLL REVEAL -->
+<!-- ============================================================ -->
+<script>
+(function(){
+  /* Terminal Splash — solo primera visita de la sesión */
+  if (!sessionStorage.getItem('xant-splash-shown')) {
+    var splash = document.getElementById('splash');
+    splash.style.display = 'flex';
+    splash.addEventListener('animationend', function(){
+      splash.style.display = 'none';
+    });
+    sessionStorage.setItem('xant-splash-shown', '1');
+  }
+
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+</body>
+</html>
