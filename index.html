@@ -681,7 +681,7 @@ tailwind.config = {
 
   <div class="max-w-2xl mx-auto reveal reveal-delay-1">
     <div class="bg-surface-container-low border border-tertiary/10 p-8 md:p-12">
-      <form action="https://submit-form.com/55Aa2st6z" method="POST">
+      <form id="contacto-form" action="https://submit-form.com/55Aa2st6z" method="POST">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label class="font-label-caps text-label-caps text-tertiary mb-1 block">NOMBRE *</label>
@@ -840,6 +840,19 @@ tailwind.config = {
   </div>
 </div>
 
+<!-- ============================================================ -->
+<!-- MODAL: Envío exitoso -->
+<!-- ============================================================ -->
+<div id="modal-enviado" class="hidden fixed inset-0 z-[100] bg-background/90 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="bg-surface-container-low border border-primary/30 max-w-md w-full p-8 text-center relative" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('modal-enviado').classList.add('hidden')" class="absolute top-3 right-4 text-tertiary hover:text-primary text-2xl leading-none">&times;</button>
+    <span class="material-symbols-outlined text-primary text-6xl mb-4 block">check_circle</span>
+    <h3 class="font-headline-md text-[22px] text-on-surface mb-2">¡Mensaje enviado!</h3>
+    <p class="font-body-md text-on-surface-variant mb-6">Gracias por contactarnos. Te respondemos el mismo día hábil.</p>
+    <button onclick="document.getElementById('modal-enviado').classList.add('hidden')" class="bg-primary text-on-primary px-6 py-3 font-label-caps text-label-caps hover:brightness-110 transition-all w-full">ENTENDIDO</button>
+  </div>
+</div>
+
 <!-- Floating WhatsApp -->
 <a href="https://wa.me/526463077208?text=Hola,%20me%20interesa%20una%20consulta%20de%20soporte%20técnico" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-xant-green flex items-center justify-center shadow-lg hover:scale-110 transition-transform" title="WhatsApp">
   <span class="material-symbols-outlined text-white text-2xl">chat</span>
@@ -858,6 +871,36 @@ tailwind.config = {
       splash.style.display = 'none';
     });
     sessionStorage.setItem('xant-splash-shown', '1');
+  }
+
+  /* Formulario de contacto — envío asíncrono con Formspark */
+  var form = document.getElementById('contacto-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var originalText = btn.innerHTML;
+      btn.innerHTML = 'ENVIANDO...';
+      btn.disabled = true;
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response) {
+        if (response.ok) {
+          form.reset();
+          document.getElementById('modal-enviado').classList.remove('hidden');
+        } else {
+          alert('Hubo un error al enviar. Intenta de nuevo o contáctanos por WhatsApp.');
+        }
+      }).catch(function() {
+        alert('Error de conexión. Intenta de nuevo o contáctanos por WhatsApp.');
+      }).finally(function() {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      });
+    });
   }
 
   var reveals = document.querySelectorAll('.reveal');
