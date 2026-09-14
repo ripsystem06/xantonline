@@ -1,0 +1,23 @@
+{
+  "project": "Valeria Racing 1908",
+  "stack": [
+    "HTML5",
+    "CSS3",
+    "JavaScript Vanilla"
+  ],
+  "reference": "assets/reference/valeria-racing-approved-mockup.png",
+  "images": [
+    "about-valeria.webp",
+    "gallery-1.webp",
+    "gallery-2.webp",
+    "gallery-3.webp",
+    "gallery-4.webp",
+    "gallery-5.webp",
+    "gallery-6.webp",
+    "hero-valeria.webp",
+    "offroad-impact.webp",
+    "partner-cta.webp"
+  ],
+  "instagram": "https://www.instagram.com/valeriaracing_1908/",
+  "note": "Concept imagery should be replaced by authorized official photography before production."
+}
