@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 72">
+      <g fill="#fff">
+        <polygon points="34,16 64,28 64,56 34,48 20,30"/>
+        <polygon points="40,24 54,30 54,42 40,38"/>
+        <rect x="98" y="27" width="3" height="24" fill="#ff2f2f"/>
+        <text x="113" y="35" font-family="Arial, sans-serif" font-size="10" letter-spacing="1.4">TU MARCA</text>
+        <text x="113" y="51" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900">AQUÍ</text>
+      </g>
+    </svg>

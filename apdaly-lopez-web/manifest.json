@@ -1,0 +1,23 @@
+{
+  "project": "Apdaly López Offroad Racing",
+  "stack": [
+    "HTML5",
+    "CSS3",
+    "JavaScript Vanilla"
+  ],
+  "reference": "assets/reference/apdaly-approved-vertical-concept.png",
+  "images": [
+    "hero.png",
+    "huella.png",
+    "ganadores.png"
+  ],
+  "prototype_logos": [
+    "sponsor-01.svg",
+    "sponsor-02.svg",
+    "sponsor-03.svg",
+    "sponsor-04.svg",
+    "sponsor-05.svg",
+    "sponsor-06.svg"
+  ],
+  "note": "Prototype assets included. Replace images and sponsor logos with approved high-resolution material before production."
+}

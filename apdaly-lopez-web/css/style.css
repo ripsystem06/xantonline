@@ -1,0 +1,248 @@
+/* APDALY LÓPEZ — MOCKUP-FAITHFUL V2 */
+:root{
+  --bg:#070809;
+  --panel:#0d0f10;
+  --panel2:#111315;
+  --text:#f5f5f5;
+  --muted:#b8bcc0;
+  --red:#ef2328;
+  --red2:#b90812;
+  --line:rgba(255,255,255,.12);
+  --container:1440px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#050607;color:var(--text);font-family:"Inter",sans-serif;overflow-x:hidden}
+body.menu-open{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button,input,textarea{font:inherit}
+.container{width:min(var(--container),calc(100% - 64px));margin-inline:auto}
+.page-noise{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.045;background-image:repeating-radial-gradient(circle at 0 0,transparent 0,rgba(255,255,255,.16) 1px,transparent 2px,transparent 5px);mix-blend-mode:soft-light}
+
+.site-loader{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;background:#050607;transition:opacity .55s ease,visibility .55s ease}
+    .is-loading{overflow:hidden}
+    .is-loading .site-loader{opacity:1;visibility:visible}
+    body:not(.is-loading) .site-loader{opacity:0;visibility:hidden;pointer-events:none}
+    .loader-mark{position:relative;width:126px;height:126px;display:grid;place-items:center;color:#f5f5f5}
+    .loader-letter{position:relative;z-index:2;font:italic 900 92px/.8 "Barlow Condensed",sans-serif;color:#f5f5f5}
+    .loader-wheel{position:absolute;inset:8px;border:5px solid #ef2328;border-right-color:transparent;border-radius:50%;animation:loader-spin .8s linear infinite}
+    .loader-label{margin:20px 0 0;font:800 18px/1 "Barlow Condensed",sans-serif;letter-spacing:.25em}
+    .loader-label span{color:#ef2328}
+    .loader-track{width:210px;height:3px;margin-top:20px;background:rgba(255,255,255,.14);overflow:hidden}
+    .loader-track span{display:block;width:45%;height:100%;background:#ef2328;animation:loader-track 1.1s cubic-bezier(.65,0,.35,1) infinite}
+    @keyframes loader-spin{to{transform:rotate(360deg)}}
+    @keyframes loader-track{0%{transform:translateX(-100%)}100%{transform:translateX(325%)}}
+
+    .site-header{position:fixed;inset:0 0 auto;z-index:100;transition:.25s}
+.site-header.scrolled{background:rgba(4,5,6,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-wrap{min-height:72px;display:flex;align-items:center;gap:24px}
+.brand img,.footer-logo{height:40px;width:auto}
+.main-nav{display:flex;gap:24px;margin-left:auto}
+.main-nav a{font:700 16px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;text-decoration:none;color:#ddd;position:relative}
+.main-nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-10px;height:3px;background:var(--red);transition:.2s}
+.main-nav a:hover::after,.main-nav a.active::after{right:0}
+.menu-toggle{display:none;margin-left:auto;background:#111;border:1px solid var(--line);width:42px;height:42px;padding:10px}
+.menu-toggle span{display:block;height:2px;background:#fff;margin:5px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;text-decoration:none;text-transform:uppercase;font:800 20px/1 "Barlow Condensed",sans-serif;border:1px solid transparent;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--red);color:#fff}
+.btn-secondary{background:rgba(0,0,0,.18);border-color:rgba(255,255,255,.65);color:#fff}
+.nav-cta{margin-left:6px}
+
+.eyebrow{margin:0 0 12px;font:800 15px/1 "Barlow Condensed",sans-serif;letter-spacing:.32em;text-transform:uppercase}
+.eyebrow.red{color:var(--red)}
+h2{margin:0;font:italic 900 clamp(50px,5vw,88px)/.83 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.035em}
+h2 span{color:var(--red)}
+
+/* HERO */
+.hero{position:relative;min-height:720px;overflow:hidden;display:grid;align-items:end;border-bottom:1px solid var(--line)}
+.hero-media,.hero-shade,.hero-grunge{position:absolute;inset:0;width:100%;height:100%}
+.hero-media{object-fit:cover;object-position:60% 50%;animation:hero-drift 12s ease-in-out infinite alternate}
+    @keyframes hero-drift{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hero-shade{background:linear-gradient(90deg,#050607 0%,rgba(5,6,7,.96) 30%,rgba(5,6,7,.48) 54%,rgba(5,6,7,.08) 78%),linear-gradient(0deg,rgba(0,0,0,.62),transparent 45%)}
+.hero-grunge{background:linear-gradient(112deg,rgba(239,35,40,.22) 0 2%,transparent 2% 25%,rgba(239,35,40,.10) 25% 27%,transparent 27%);mix-blend-mode:screen;opacity:.6}
+.hero-layout{position:relative;z-index:2;display:grid;grid-template-columns:1fr 320px;align-items:end;min-height:720px}
+.hero-copy{padding:125px 0 72px;max-width:680px}
+.hero h1{display:grid;margin:0;font:italic 900 clamp(86px,9vw,150px)/.76 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.055em}
+.hero h1 span{color:#f3f3f3}
+.hero h1 strong{color:var(--red)}
+.hero-subtitle{margin:20px 0 10px;font:italic 800 36px/1 "Barlow Condensed",sans-serif;text-transform:uppercase}
+.hero-text{color:#d1d4d7;font-size:19px}
+.hero-actions{display:flex;gap:14px;margin-top:28px}
+.hero-note{align-self:start;justify-self:end;margin-top:110px;font:400 38px/1.02 "Permanent Marker",cursive;transform:rotate(-7deg);text-align:right}
+.hero-note span{display:block}
+.hero-note span:last-child::after{content:"";display:block;width:120px;height:5px;background:var(--red);margin:8px 0 0 auto}
+.hero-side-copy{position:absolute;right:0;bottom:70px;text-align:right;font:700 13px/1.25 "Barlow Condensed",sans-serif;letter-spacing:.18em;color:#ddd}
+.hero-side-copy span,.hero-side-copy strong{display:block}
+.hero-side-copy strong{font-size:18px;color:#fff}
+
+/* SPONSOR STRIP */
+.sponsor-strip{background:#07090a;border-block:1px solid var(--line)}
+.sponsor-strip-grid{min-height:105px;display:grid;grid-template-columns:190px 1fr;align-items:center}
+.strip-label{font:700 15px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;border-right:1px solid var(--line);padding-right:28px}
+.strip-label span,.strip-label strong{display:block}
+.strip-label strong{margin-top:4px;font-size:20px}
+.sponsor-logos{display:grid;grid-template-columns:repeat(6,1fr)}
+.sponsor-logos img{height:66px;width:100%;object-fit:contain;padding:8px 18px;border-right:1px solid var(--line);transition:transform .25s ease,filter .25s ease}
+    .sponsor-logos img:hover{transform:scale(1.08);filter:brightness(1.3)}
+
+/* EDITORIAL BANDS */
+.editorial-band{background:#090b0c;overflow:hidden;border-bottom:1px solid var(--line)}
+.editorial-grid{display:grid;grid-template-columns:.44fr .56fr;min-height:520px}
+.editorial-copy{padding:62px 50px 62px 0;align-self:center}
+.editorial-copy p:not(.eyebrow){max-width:590px;color:#c7cbce;line-height:1.6;font-size:17px}
+.editorial-copy .btn{margin-top:10px}
+.editorial-visual{position:relative;min-height:520px;margin-right:calc((100vw - min(var(--container),calc(100vw - 64px)))/-2)}
+.editorial-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%}
+    .about-visual img{width:80%;left:20%;}
+.visual-gradient{position:absolute;inset:0;background:linear-gradient(90deg,#090b0c 0%,rgba(9,11,12,.45) 22%,transparent 55%),linear-gradient(0deg,rgba(0,0,0,.42),transparent 45%)}
+.signature{position:absolute;right:11%;top:34%;font:400 44px/1 "Permanent Marker",cursive;transform:rotate(-8deg);text-align:center}
+.vertical-values{position:absolute;right:7%;bottom:70px;display:grid;gap:5px;font:700 17px/1 "Barlow Condensed",sans-serif;letter-spacing:.2em}
+.vertical-values::after{content:"";width:42px;height:5px;background:var(--red);margin-top:8px}
+
+/* ACHIEVEMENT */
+.achievement{position:relative;min-height:500px;overflow:hidden;border-bottom:1px solid var(--line)}
+.achievement-bg,.achievement-overlay,.achievement-texture{position:absolute;inset:0;width:100%;height:100%}
+.achievement-bg{object-fit:cover;object-position:62% 52%}
+.achievement-overlay{background:linear-gradient(90deg,#070809 0%,rgba(7,8,9,.94) 33%,rgba(7,8,9,.35) 58%,rgba(7,8,9,.08) 100%)}
+.achievement-texture{background:linear-gradient(112deg,rgba(239,35,40,.12) 0 3%,transparent 3% 17%,rgba(239,35,40,.08) 17% 19%,transparent 19%);mix-blend-mode:screen}
+.achievement-layout{position:relative;z-index:2;min-height:500px;display:grid;grid-template-columns:1fr 270px;align-items:center}
+.achievement-copy{max-width:610px}
+.achievement-copy h2{font-size:clamp(54px,5.5vw,92px)}
+.achievement-copy p:not(.eyebrow,.achievement-category){color:#d0d3d6;font-size:17px;line-height:1.62}
+.achievement-category{font:italic 800 32px/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.achievement-side{justify-self:end;align-self:end;margin-bottom:76px;display:grid;gap:6px;font:700 20px/1 "Barlow Condensed",sans-serif;letter-spacing:.18em}
+.achievement-side::after{content:"";width:44px;height:5px;background:var(--red);margin-top:6px}
+
+/* GALLERY RIBBON */
+.gallery-ribbon{background:#07090a;border-bottom:1px solid var(--line);padding:24px 0}
+.ribbon-grid{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:center}
+.ribbon-title h2{font-size:50px}
+.ribbon-images{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.gallery-item{border:0;padding:0;background:#111;height:115px;overflow:hidden;cursor:zoom-in}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease}
+.gallery-item:hover img{transform:scale(1.05)}
+
+/* RACE RIBBON */
+.race-ribbon{background:#090b0c;border-bottom:1px solid var(--line);padding:22px 0}
+.race-ribbon-grid{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:stretch}
+.race-intro h2{font-size:48px}
+.race-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.race-card{position:relative;min-height:150px;overflow:hidden;border:1px solid var(--line);transition:transform .3s ease,border-color .3s ease}
+    .race-card:hover{transform:translateY(-6px);border-color:var(--red)}
+.race-card img,.race-overlay{position:absolute;inset:0;width:100%;height:100%}
+.race-card img{object-fit:cover}
+.race-overlay{background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.14) 72%)}
+.race-copy{position:absolute;left:16px;bottom:16px;right:60px}
+.race-copy strong,.race-copy span{display:block}
+.race-copy strong{font:800 26px/1 "Barlow Condensed",sans-serif;text-transform:uppercase}
+.race-copy span{margin-top:4px;color:#ddd;font-size:12px}
+.race-arrow{position:absolute;right:0;bottom:0;width:46px;height:46px;display:grid;place-items:center;background:var(--red);font-size:26px}
+
+/* CTA */
+.sponsor-cta{position:relative;min-height:390px;overflow:hidden;border-bottom:1px solid var(--line)}
+.cta-bg,.cta-overlay{position:absolute;inset:0;width:100%;height:100%}
+.cta-bg{object-fit:cover;object-position:62% 50%}
+.cta-overlay{background:linear-gradient(90deg,#08090a 0%,rgba(8,9,10,.88) 38%,rgba(8,9,10,.22) 74%),linear-gradient(0deg,rgba(0,0,0,.3),transparent)}
+.sponsor-cta-layout{position:relative;z-index:2;min-height:390px;display:grid;grid-template-columns:1fr 300px;align-items:center}
+.sponsor-copy{max-width:640px}
+.sponsor-copy p:not(.eyebrow){color:#ddd;line-height:1.6;font-size:16px}
+.cta-side-note{justify-self:end;text-align:right;display:grid;font:700 21px/1.05 "Barlow Condensed",sans-serif;letter-spacing:.13em}
+.cta-side-note strong{font-size:27px}
+.cta-side-note strong::after{content:"";display:block;width:48px;height:5px;background:var(--red);margin:10px 0 0 auto}
+
+/* CONTACT */
+.contact{background:#070809;padding:60px 0 72px}
+.contact-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
+.contact-copy p:last-child{color:#aaa;line-height:1.6}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:grid;gap:7px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#bbb}
+form .full{grid-column:1/-1}
+input,textarea{background:#0d0f10;border:1px solid var(--line);color:#fff;padding:13px;outline:none}
+input:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,35,40,.12)}
+.form-status{margin:0;color:#ddd;font-size:12px}
+
+/* FOOTER */
+.site-footer{background:#050607;border-top:1px solid var(--line);padding:22px 0}
+.footer-grid{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.footer-links a{font-size:11px;color:#bbb;text-decoration:none}
+.footer-right{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.15em;color:#ddd}
+
+/* LIGHTBOX */
+.lightbox{border:1px solid rgba(255,255,255,.2);background:#050607;padding:0;max-width:min(1000px,calc(100% - 24px))}
+.lightbox::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(4px)}
+.lightbox img{max-height:84vh;max-width:100%}
+.lightbox-close{position:absolute;right:10px;top:10px;width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid #666;color:#fff;font-size:27px}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:.6s ease}
+.reveal.is-visible{opacity:1;transform:none}
+.delay-1{transition-delay:.08s}
+.delay-2{transition-delay:.16s}
+
+/* RESPONSIVE */
+@media(max-width:1050px){
+  .nav-cta{display:none}
+  .main-nav{gap:15px}
+  .container{width:min(var(--container),calc(100% - 36px))}
+  .editorial-grid{grid-template-columns:.5fr .5fr}
+  .ribbon-grid,.race-ribbon-grid{grid-template-columns:220px 1fr}
+}
+@media(max-width:860px){
+  .site-header{background:rgba(5,6,7,.94);backdrop-filter:blur(12px)}
+  .menu-toggle{display:block}
+  .main-nav{display:none;position:fixed;inset:72px 0 auto;background:rgba(5,6,7,.98);padding:22px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+  .main-nav.open{display:flex}
+  .main-nav a{font-size:22px}
+  .hero{min-height:820px}
+  .hero-media{object-position:68% center}
+  .hero-shade{background:linear-gradient(0deg,#050607 0%,rgba(5,6,7,.94) 40%,rgba(5,6,7,.17) 80%)}
+  .hero-layout{grid-template-columns:1fr;min-height:820px}
+  .hero-copy{padding-top:390px;padding-bottom:48px}
+  .hero-note,.hero-side-copy{display:none}
+  .sponsor-strip-grid{grid-template-columns:1fr}
+  .strip-label{border-right:0;border-bottom:1px solid var(--line);padding:15px 0}
+  .sponsor-logos{grid-template-columns:repeat(3,1fr)}
+  .editorial-grid{grid-template-columns:1fr}
+  .editorial-copy{padding:60px 0 30px}
+  .editorial-visual{margin:0;min-height:540px}
+  .achievement-layout{grid-template-columns:1fr}
+  .achievement-side{display:none}
+  .achievement-bg{object-position:68% center}
+  .achievement-overlay{background:linear-gradient(0deg,#070809 0%,rgba(7,8,9,.94) 44%,rgba(7,8,9,.2) 86%)}
+  .achievement-copy{padding-top:250px;padding-bottom:46px}
+  .ribbon-grid,.race-ribbon-grid{grid-template-columns:1fr}
+  .ribbon-images{grid-template-columns:repeat(3,1fr)}
+  .race-cards{grid-template-columns:1fr}
+  .sponsor-cta-layout{grid-template-columns:1fr}
+  .cta-side-note{display:none}
+  .contact-layout{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;text-align:left}
+  .footer-links{justify-content:flex-start}
+}
+@media(max-width:600px){
+  .container{width:calc(100% - 28px)}
+  .brand img,.footer-logo{height:32px}
+  .hero h1{font-size:unset}
+  .hero h1 span{font-size:72px}
+  .hero h1 strong{font-size:78px}
+  .hero-subtitle{font-size:28px}
+  .hero-actions{display:grid}
+  .btn{width:100%}
+  .sponsor-logos{grid-template-columns:1fr 1fr}
+  .editorial-visual{min-height:480px}
+  .signature{font-size:34px}
+  .vertical-values{font-size:14px}
+  .ribbon-images{grid-template-columns:1fr 1fr}
+  .gallery-item{height:130px}
+  .contact{padding-top:50px}
+  form{grid-template-columns:1fr}
+  form .full{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}

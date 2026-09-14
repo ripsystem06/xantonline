@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Apdaly López</title>
+  <desc id="desc">Letra A junto a una llanta</desc>
+  <rect width="64" height="64" rx="12" fill="#070809"/>
+  <path d="M10 48 24 14h10l14 34h-9l-3-8H22l-3 8h-9Zm15-16h8l-4-11-4 11Z" fill="#f5f5f5"/>
+  <circle cx="48" cy="43" r="11" fill="#ef2328" stroke="#f5f5f5" stroke-width="3"/>
+  <circle cx="48" cy="43" r="4" fill="#070809"/>
+  <path d="m48 32v7m0 8v7m11-11h-7m-8 0h-7m18-8-5 5m-8 8-5 5m18 0-5-5m-8-8-5-5" stroke="#070809" stroke-width="2" stroke-linecap="round"/>
+</svg>

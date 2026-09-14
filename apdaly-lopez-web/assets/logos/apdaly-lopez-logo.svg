@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 90" role="img" aria-labelledby="title">
+  <title id="title">Apdaly López logotipo prototipo</title>
+  <defs>
+    <style>
+      .w1{fill:#ffffff;font-family:'Arial Black',Arial,sans-serif;font-size:48px;font-style:italic;font-weight:900}
+      .w2{fill:#ff2f2f;font-family:'Arial Black',Arial,sans-serif;font-size:48px;font-style:italic;font-weight:900}
+      .s{fill:#ff2f2f}
+    </style>
+  </defs>
+  <polygon class="s" points="8,16 38,16 22,74 0,74"/>
+  <polygon class="s" points="42,16 72,16 56,74 34,74"/>
+  <polygon class="s" points="76,16 106,16 90,74 68,74"/>
+  <text x="120" y="58" class="w1">APDALY</text>
+  <text x="325" y="58" class="w2">LÓPEZ</text>
+</svg>

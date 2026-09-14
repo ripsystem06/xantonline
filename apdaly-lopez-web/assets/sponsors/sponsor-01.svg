@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 72">
+      <rect width="220" height="72" fill="none"/>
+      <g fill="#fff">
+        <path d="M18 51l27-30 15 16 20-22 31 36H18z"/>
+        <rect x="108" y="27" width="3" height="24" fill="#ff2f2f"/>
+        <text x="123" y="35" font-family="Arial, sans-serif" font-size="10" letter-spacing="1.4">TU MARCA</text>
+        <text x="123" y="51" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900">AQUÍ</text>
+      </g>
+    </svg>
